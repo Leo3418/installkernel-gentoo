@@ -54,7 +54,6 @@ while [ ${#} -gt 0 ]; do
 		;;
 		--verbose|-v)
 			INSTALLKERNEL_VERBOSE=1
-			_ik_remaining_optargs="${_ik_remaining_optargs} ${1}"
 		;;
 		--all|-a)
 			_ik_install_all=1
@@ -90,6 +89,10 @@ while [ ${#} -gt 0 ]; do
 	esac
 	shift
 done
+
+if [ "${INSTALLKERNEL_VERBOSE}" -gt 0 ]; then
+	_ik_remaining_optargs="${_ik_remaining_optargs} --verbose"
+fi
 
 if [ "${SYSTEMD_KERNEL_INSTALL}" -eq 1 ] && command -v kernel-install >/dev/null
 then
